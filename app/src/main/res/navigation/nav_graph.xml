@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/ayCMultimediaFragment"
+        android:name="com.example.moviles_systemcolor.AyCMultimediaFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_aycmultimedia" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.moviles_systemcolor.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_ayCMultimediaFragment"
+            app:destination="@id/ayCMultimediaFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_reproduccionRemotaFragment"
+            app:destination="@id/reproduccionRemotaFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_enrutadorMediosFragment"
+            app:destination="@id/enrutadorMediosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reproduccionRemotaFragment"
+        android:name="com.example.moviles_systemcolor.ReproduccionRemotaFragment"
+        android:label="fragment_reproduccion_remota"
+        tools:layout="@layout/fragment_reproduccion_remota" />
+    <fragment
+        android:id="@+id/enrutadorMediosFragment"
+        android:name="com.example.moviles_systemcolor.EnrutadorMediosFragment"
+        android:label="fragment_enrutador_medios"
+        tools:layout="@layout/fragment_enrutador_medios" />
+</navigation>
