@@ -9,7 +9,14 @@
         android:id="@+id/ayCMultimediaFragment"
         android:name="com.example.moviles_systemcolor.AyCMultimediaFragment"
         android:label="fragment_blank"
-        tools:layout="@layout/fragment_aycmultimedia" />
+        tools:layout="@layout/fragment_aycmultimedia" >
+        <action
+            android:id="@+id/action_ayCMultimediaFragment_to_imagenFragment"
+            app:destination="@id/imagenFragment" />
+        <action
+            android:id="@+id/action_ayCMultimediaFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.example.moviles_systemcolor.MenuFragment"
@@ -35,4 +42,14 @@
         android:name="com.example.moviles_systemcolor.EnrutadorMediosFragment"
         android:label="fragment_enrutador_medios"
         tools:layout="@layout/fragment_enrutador_medios" />
+    <fragment
+        android:id="@+id/imagenFragment"
+        android:name="com.example.moviles_systemcolor.ImagenFragment"
+        android:label="fragment_imagen"
+        tools:layout="@layout/fragment_imagen" />
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.example.moviles_systemcolor.VideoFragment"
+        android:label="fragment_video"
+        tools:layout="@layout/fragment_video" />
 </navigation>
