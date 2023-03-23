@@ -36,7 +36,7 @@ class ReproduccionRemotaFragment : Fragment() {
         playerView.player = player
 
         // Crea una instancia de MediaItem con la URL del contenido remoto
-        val mediaItem: MediaItem = MediaItem.fromUri("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+        val mediaItem: MediaItem = MediaItem.fromUri("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4")
 
         // Crea un MediaSource a partir del MediaItem
         val mediaSource = ProgressiveMediaSource.Factory(DefaultDataSourceFactory(requireContext()))
