@@ -1,59 +1,57 @@
 package com.example.moviles_systemcolor
 
+
+import android.media.browse.MediaBrowser
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavDeepLinkRequest.Builder.Companion.fromUri
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaItem.fromUri
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ReproduccionRemotaFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReproduccionRemotaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var player: SimpleExoPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reproduccion_remota, container, false)
+        // Infla el diseño del fragmento
+        val rootView = inflater.inflate(R.layout.fragment_reproduccion_remota, container, false)
+
+        // Obtiene el PlayerView del diseño inflado
+        val playerView = rootView.findViewById<PlayerView>(R.id.player_view)
+
+        // Crea un SimpleExoPlayer
+        player = SimpleExoPlayer.Builder(requireContext()).build()
+
+        // Asigna el SimpleExoPlayer al PlayerView
+        playerView.player = player
+
+        // Crea una instancia de MediaItem con la URL del contenido remoto
+        val mediaItem: MediaItem = MediaItem.fromUri("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+
+        // Crea un MediaSource a partir del MediaItem
+        val mediaSource = ProgressiveMediaSource.Factory(DefaultDataSourceFactory(requireContext()))
+            .createMediaSource(mediaItem)
+
+        // Prepara el reproductor con el MediaSource
+        player.prepare(mediaSource)
+
+        return rootView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReproduccionRemotaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReproduccionRemotaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Libera los recursos del SimpleExoPlayer cuando se destruye la vista
+        player.release()
     }
 }
